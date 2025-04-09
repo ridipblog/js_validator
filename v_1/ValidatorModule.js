@@ -2,6 +2,7 @@ class ValidateModule {
     #default_rules = {};
     #default_messages = {};
     constructor() {
+        console.log("Module Called");
         // ----------- default rules ----------
         this.#default_rules = {
             'required': this.#checkRequired.bind(this),
