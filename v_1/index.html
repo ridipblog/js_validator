@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>About CDN Module</title>
+        <!-- Bootstrap 5 CSS CDN -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap Icons (optional) -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+        <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    pre {
+      background-color: #212529;
+      color: #f8f9fa;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+    }
+        </style>
+    </head>
+    <body>
+        <div class="container py-5">
+            <!-- Header -->
+            <div class="text-center mb-5">
+                <h1 class="fw-bold">📦 CDN Module: Js Validator</h1>
+                <p class="text-muted">Validate input field with Js Validator</p>
+            </div>
+            <!-- About CDN Text Box -->
+            <div class="mb-4">
+                <label for="aboutCdn" class="form-label fw-semibold">📝 About this CDN:</label>
+                <textarea
+                    id="aboutCdn"
+                    class="form-control"
+                    rows="4"
+                    readonly
+                >
+                    The Validator Module is a lightweight JavaScript utility designed to validate user input in forms. It ensures that required fields are filled, formats like email and phone numbers are correct, and invalid data is prevented from being submitted. This helps improve user experience and maintains clean, consistent, and secure data handling.</textarea>
+            </div>
+            <!-- How to Use Section -->
+            <div>
+                <h4 class="mb-3 fw-semibold">💡 How to Use</h4>
+                
+                <p>Just paste the following CDN links inside your HTML file:</p>
+                <pre id="code-block">
+                    <code>
+    &lt;!-- Validator JS --&gt;
+    <!-- &lt; import ValidateModule from 'https://ridipblog.github.io/js_validator/v_1/ValidatorModule.js?version=1.2';&gt; -->
+
+    &ltscript src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"&gt&lt/script&gt
+
+    import ValidateModule from 'https://ridipblog.github.io/js_validator/v_1/ValidatorModule.js;
+                    </code>
+                </pre>
+                <button class="btn btn-sm btn-warning copy-btn mb-3" onclick="copyCode('code-block')">Copy</button>
+
+                <p>How Implement On HTML Code:</p>
+                <ol class="mb-4">
+                    <li><strong>Add `handle-request` class in input if you want validate that input </strong></li>
+                  </ol>
+                <pre id="html-code">
+                    <code>
+    &ltinput type="text" name="user_name" class="handle-request"&gt
+    &ltinput type="text" name="user_mail" class="handle-request"&gt
+    &ltinput type="text" name="user_phone" class="handle-request"&gt
+    &ltbutton id="submit-btn"&gtSubmit&lt/button&gt
+                    </code>
+                </pre>
+                <button class="btn btn-sm btn-warning copy-btn mb-3" onclick="copyCode('html-code')">Copy</button>
+
+                <p>How Implement on Js Script</p>
+
+                <pre id="js-code">
+                    <code>
+    &ltscript&gt
+
+    // Create New Object of Validator
+    const validate_module = new ValidateModule();
+
+    $(document).ready(function () {
+
+        // Add On Click Event By jqery (Or Js)
+        $(document).on('click', '#submit-btn', async function () {
+
+            // Add Key - Value Pair , Key is Input Name And Values are Validation area
+            const validate_fields = {
+                'user_name': ['required'],
+                "user_mail": ['required','email'],
+                'user_phone':['required','number','phone']
+            };
+
+            // Write Custom Message for Validation area
+            const messages={
+                'required':'plaese enter value for :attribute'
+            };
+
+            // Call Validate Function 
+            validate_module.validateWithInputs(validate_fields,messages).then((result) => {
+                if(result.fail){
+                    console.log(result.errors)
+                }else{
+                }
+            }).catch((error) => {
+                console.log(error);
+            });
+
+            // --------- if direct used with await keyword ------------
+            // let validator=await validate_module.validateWithInputs(validate_fields);
+        });
+    });
+
+    &lt/script&gt
+
+                    </code>
+                </pre>
+
+                <button class="btn btn-sm btn-warning copy-btn" onclick="copyCode('js-code')">Copy</button>
+            </div>
+        </div>
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            function copyCode(id) {
+              const code = document.querySelector(`#${id}`).innerText;
+              navigator.clipboard.writeText(code).then(() => {
+                alert('Code copied to clipboard!');
+              });
+            }
+          </script>
+
+    </body>
+</html>

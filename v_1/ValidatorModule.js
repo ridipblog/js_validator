@@ -2,13 +2,14 @@ class ValidateModule {
     #default_rules = {};
     #default_messages = {};
     constructor() {
+        console.log("MOdule Loading");
         // ----------- default rules ----------
         this.#default_rules = {
             'required': this.#checkRequired.bind(this),
             'email': this.#checkValidEmail.bind(this),
             'phone': this.#checkValidPhone.bind(this),
-            'number':this.#checkNumber.bind(this),
-            'array':this.#checkIsArray.bind(this)
+            'number': this.#checkNumber.bind(this),
+            'array': this.#checkIsArray.bind(this)
         }
         // ---------------- default error messages ---------------
         this.#default_messages = {
@@ -16,7 +17,7 @@ class ValidateModule {
             'email': ':attribute is not a valid email',
             'phone': ':attribute is not a valid phone number',
             'number': ':attribute is must be and number type',
-            'array':':attribute is must an array type'
+            'array': ':attribute is must an array type'
         }
     }
     // ------------ check required field --------------
@@ -38,7 +39,7 @@ class ValidateModule {
         return !isNaN(value);
     }
     // -------- check is a arrya ----------
-    #checkIsArray=async(value)=>{
+    #checkIsArray = async (value) => {
         return Array.isArray(value);
     }
     // ----------- execute validation -------------
@@ -62,6 +63,7 @@ class ValidateModule {
             fail: is_error
         }
     }
-
+    
 }
+
 export default ValidateModule;
