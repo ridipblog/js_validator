@@ -18,8 +18,8 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
     <script type="module">
-        // import ValidateModule from 'https://ridipblog.github.io/js_validator/v_1/ValidatorModule.js<?php echo time() ; ?>';
-        import ValidateModule from "./ValidatorModule.js?version=<?php echo time();?>"
+        // import ValidateModule from 'https://ridipblog.github.io/js_validator/v_1/ValidatorModule.js';
+        import ValidateModule from "./ValidatorModule.min.js?version=<?php echo time();?>"
         const validate_module = new ValidateModule();
 
         $(document).ready(function() {
