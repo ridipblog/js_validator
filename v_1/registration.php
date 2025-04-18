@@ -14,12 +14,31 @@
     <button id="submit-btn">Submit</button>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-    <!-- Load Validate Module  -->
     <script type="module">
-        // import ValidateModule from './ValidatorModule.js?version=<?php echo time(); ?>';
+        import ValidateModule from 'https://ridipblog.github.io/js_validator/v_1/ValidatorModule.js';
+        const validate_module = new ValidateModule();
 
-        import ValidateModule from 'https://ridipblog.github.io/js_validator/v_1/ValidatorModule.js?version=1.2';
-        const validate = new ValidateModule();
+        $(document).ready(function() {
+            $(document).on('click', '#submit-btn', async function() {
+                const validate_fields = {
+                    'user_name': ['required'],
+                    "user_mail": ['required', 'email'],
+                    'user_phone': ['required', 'number', 'phone']
+                };
+                const messages = {
+                    'required': 'plaese enter value for :attribute'
+                };
+                validate_module.validateWithInputs(validate_fields, messages).then((result) => {
+                    if (result.fail) {
+                        console.log(result.errors)
+                    } else {}
+                }).catch((error) => {
+                    console.log(error);
+                });
+                // --------- if direct used with await keyword ------------
+                // let validator=await validate_module.validateWithInputs(validate_fields);
+            });
+        });
     </script>
 </body>
 

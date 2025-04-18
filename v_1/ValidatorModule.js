@@ -63,6 +63,34 @@ class ValidateModule {
             fail: is_error
         }
     }
+
+    // Display Error Message On p tag 
+    showErrorMessage = async (class_input, class_error, message) => {
+        $(class_error).html('');
+        for (var i = 0; i < $(class_input).length; i++) {
+            for (var j = 0; j < message.length; j++) {
+                // message.forEach(mes => {
+                // if (mes.indexOf($(class_input).eq(i).attr('name').replaceAll('_', ' ')) !== -1) {
+                //     $(class_error).eq(i).html(mes);
+                // }
+                var regex;
+                if (res_type == "back_end") {
+                    regex = new RegExp(`\\b${$(class_input).eq(i).attr('name').replaceAll('_', ' ').replaceAll('[]', '')}\\b`, 'gim');
+                } else {
+                    regex = new RegExp(`\\b${$(class_input).eq(i).attr('name')}\\b`, 'gim');
+                }
+                if (regex.test(message[j])) {
+                    $(class_error).eq(i).html(message[j].replaceAll('_', ' '));
+                    if (res_type == "back_end") {
+                        break;
+                    }
+                }
+
+                // });
+            }
+        }
+        // $(class_error).eq(0).html("{{__('transfer_messages.transfer_message.request_cancel')}}")
+    }
     
 }
 
