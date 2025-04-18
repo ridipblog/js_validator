@@ -2,7 +2,7 @@ class ValidateModule {
     #default_rules = {};
     #default_messages = {};
     constructor() {
-        
+
         // ----------- default rules ----------
         this.#default_rules = {
             'required': this.#checkRequired.bind(this),
@@ -66,32 +66,28 @@ class ValidateModule {
 
     // Display Error Message On p tag 
     showErrorMessage = async (class_input, class_error, message) => {
-        $(class_error).html('');
-        for (var i = 0; i < $(class_input).length; i++) {
-            for (var j = 0; j < message.length; j++) {
-                // message.forEach(mes => {
-                // if (mes.indexOf($(class_input).eq(i).attr('name').replaceAll('_', ' ')) !== -1) {
-                //     $(class_error).eq(i).html(mes);
-                // }
-                var regex;
-                if (res_type == "back_end") {
-                    regex = new RegExp(`\\b${$(class_input).eq(i).attr('name').replaceAll('_', ' ').replaceAll('[]', '')}\\b`, 'gim');
-                } else {
-                    regex = new RegExp(`\\b${$(class_input).eq(i).attr('name')}\\b`, 'gim');
-                }
+        $(class_error).html(''); // Clear all error messages
+
+        $(class_input).each(function (i) {
+            let res_type=null;
+            const inputName = $(this).attr('name');
+            // const formattedName = inputName.replaceAll('_', ' ').replaceAll('[]', '');
+            // const targetName = res_type === "back_end" ? formattedName : inputName;
+            // const regex = new RegExp(`\\b${targetName}\\b`, 'gim');
+            const regex = new RegExp(`\\b${inputName}\\b`, 'gim');
+
+            for (let j = 0; j < message.length; j++) {
                 if (regex.test(message[j])) {
                     $(class_error).eq(i).html(message[j].replaceAll('_', ' '));
-                    if (res_type == "back_end") {
-                        break;
-                    }
+                    // if (res_type === "back_end") break;
                 }
-
-                // });
             }
-        }
+        });
+
+
         // $(class_error).eq(0).html("{{__('transfer_messages.transfer_message.request_cancel')}}")
     }
-    
+
 }
 
 export default ValidateModule;
