@@ -58,13 +58,16 @@
                 <p>How Implement On HTML Code:</p>
                 <ol class="mb-4">
                     <li><strong>Add `handle-request` class in input if you want validate that input </strong></li>
+                    <li><strong>Add `handle-error` class in p tag if you want show error messages </strong></li>
                   </ol>
                 <pre id="html-code">
                     <code>
     &ltinput type="text" name="user_name" class="handle-request"&gt
+    &ltp class="handle-error"&gt&lt/p&gt
     &ltinput type="text" name="user_mail" class="handle-request"&gt
+    &ltp class="handle-error"&gt&lt/p&gt
     &ltinput type="text" name="user_phone" class="handle-request"&gt
-    &ltbutton id="submit-btn"&gtSubmit&lt/button&gt
+    &ltp class="handle-error"&gt&lt/p&gt
                     </code>
                 </pre>
                 <button class="btn btn-sm btn-warning copy-btn mb-3" onclick="copyCode('html-code')">Copy</button>
@@ -98,7 +101,8 @@
             // Call Validate Function 
             validate_module.validateWithInputs(validate_fields,messages).then((result) => {
                 if(result.fail){
-                    console.log(result.errors)
+                    // This code show validate error messages on P Tag
+                    await validate_module.showErrorMessage('.handle-request', '.handle-error', result.errors);
                 }else{
                 }
             }).catch((error) => {
